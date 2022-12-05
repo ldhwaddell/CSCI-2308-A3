@@ -2,13 +2,13 @@
 
       IMPLICIT NONE
 
-      INTEGER, PARAMETER :: N = 2 ! Number of nonlinear equations
+      INTEGER, PARAMETER :: N = 1 ! Number of nonlinear equations
       INTEGER, PARAMETER :: LWA = N*(N+3) ! Size of work array, WA
 
       INTEGER :: INFO
 
       DOUBLE PRECISION :: X(N),FVEC(N),TOL,WA(LWA)  
-	                      
+                      
       EXTERNAL FCN ! This function name is defined in a separate 
                    ! software component external to the main program 
       !--------------------------------------------------------------                                                        
@@ -16,8 +16,7 @@
       TOL = 1.D-5 ! Set tolerance                                                      
 
       !STARTING VALUES.
-      X(1) = 2.0D0
-      X(2) = 3.0D0
+      X(1) = 1.0D0
 
       CALL BRENT1(FCN,N,X,FVEC,TOL,INFO,WA,LWA)
 
@@ -36,8 +35,7 @@
       INTEGER :: N,IFLAG
       DOUBLE PRECISION :: X(N),FVEC(N)
 
-      FVEC(1) = X(1)*x(2) - X(2)**3 - 1.0D0
-      FVEC(2) = X(1)**2 * X(2) + X(2) - 5.0D0
+      FVEC(1) = 2*X(1)*COTAN(X(1)) - X(1)**2 + 1.0D0
 
       RETURN
 
